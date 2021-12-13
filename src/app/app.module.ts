@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -8,6 +9,7 @@ import { environment } from '../environments/environment';
 import { SplashScreenComponent } from './components/splash-screen/splash-screen.component';
 import { HomeComponent } from './components/home/home.component';
 import { SwPush} from '@angular/service-worker';
+//import { PushNotificationService } from './services/push-notification.service';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { SwPush} from '@angular/service-worker';
   ],
   imports: [
     BrowserModule,
+    AngularFireModule.initializeApp(environment.configfirebase),
+    AngularFireMessagingModule,
     AppRoutingModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
@@ -25,7 +29,7 @@ import { SwPush} from '@angular/service-worker';
       registrationStrategy: 'registerWhenStable:30000'
     })
   ],
-  providers: [],
+  providers:[],
   bootstrap: [AppComponent]
 })
 export class AppModule {
